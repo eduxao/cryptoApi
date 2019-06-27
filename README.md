@@ -10,16 +10,16 @@ Utilizado a API da CoinMarketCap
 
 ## Para roda o projeto
 - Aplicação
-...
->npm install express
->npm i request-promise
->npm install cors
-...
+
+> npm install express
+> npm i request-promise
+> npm install cors
+
 - Rodar Scripts
-...
->npm install — save-dev nodemon
->npm install http-server -g
-...
+
+> npm install — save-dev nodemon
+> npm install http-server -g
+
 ## Como rodar o projeto
 
 - Criar uma conta no CoinMarketCap e adquirir a key

@@ -5,8 +5,7 @@
 - JavaScript
 - Bootstrap
 - Axios
-
-Utilizado a API da CoinMarketCap
+- Utilizado a API da CoinMarketCap
 
 ##### Para roda o projeto
 ###### Aplicação

@@ -9,73 +9,78 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light">
         <span class="navbar-brand mb-0 h1">Cryptocurrencies Watcher</span>
     </nav>
-    
-           <div class="container">
-            
+
+    <div class="container">
+
         <div class="col-xs-2">
-            <input type="text" class="form-control" id='symbol' placeholder="Symbol" aria-label="Symbol" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" id='symbol' placeholder="Symbol" aria-label="Symbol"
+                aria-describedby="basic-addon2">
         </div>
         <div>
-        <button type="button" id='btRequest' class="btn btn-primary" onclick="iniciaAutoReload();">Consulta Valor</button>
-            </div>
+            <button type="button" id='btRequest' class="btn btn-primary" onclick="iniciaAutoReload();">Consulta
+                Valor</button>
+        </div>
 
         <div id='divMoeda'>
             <h1 id='moeda' style="color:cornflowerblue"></h1>
             <h1 id='valor' style="color: forestgreen"></h1>
             <h1 id='data' style="color:cornflowerblue"></h1>
-            <h1 id='erro' style="color: red"></h1>     
+            <h1 id='erro' style="color: red"></h1>
         </div>
-       
+
 
 
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    
 
     <script>
 
-
-        
+        var refreshIntervalId
 
         function iniciaAutoReload() {
-            
+
             let symbolSel = document.getElementById('symbol').value
             
-            if (symbolSel.length === 3){
-
-            fazerRequisicao(symbolSel)
-
-            setInterval(function () {
-
-                $('divMoeda').text(
-                    fazerRequisicao(symbolSel));
-            }, 10000);
-        }else {
-            insertInfo('erro', 'Invalid symbol!')
-        }
-        }
-
-
-        function fazerRequisicao(symbolSel) {
-
             
+            if (symbolSel.length === 3) {
 
-            symbolSel = symbolSel.toUpperCase()
+                if (refreshIntervalId) {
+                    clearInterval(refreshIntervalId)
+                }
+                fazerRequisicao(symbolSel) 
+                refreshIntervalId = setInterval(function () { 
+                    fazerRequisicao(symbolSel) 
+                 }, 3000);
+    
+                 
+
+                 var symbolAnt = symbolSel
+
+
+            } else {
+                insertInfo('erro', 'Invalid symbol!')
+            }
+        }
+        
+        function fazerRequisicao(symbolSel) {
+            symbol = symbolSel.toUpperCase()
 
             axios.get('http://localhost:3000/cryptocurrencies')
                 .then(response => {
 
                     let obj = response.data
-
                     let moeda = obj.filter((novoObjeto) => {
 
                         return novoObjeto.symbol === symbolSel;
 
                     })
+
+                    console.log(symbolSel)
 
                     let symbol = moeda[0].symbol
                     let precoMoeda = moeda[0].quote.BRL.price
@@ -95,10 +100,11 @@
                     insertInfo('moeda', nomeMoeda)
                     insertInfo('valor', valorFormat)
                     insertInfo('data', data)
+                    insertInfo('erro', '')
 
                 }).catch((err) => {
-                    insertInfo('erro', 'Symbol not found')
-                    
+                    insertInfo('erro', err.message)
+
                 });
 
 

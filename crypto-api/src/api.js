@@ -1,5 +1,5 @@
 const express = require('express'); //importacao do pacote
-const       = express(); //instanciando express
+const app = express(); //instanciando express
 const rp = require('request-promise');
 const cors = require('cors');
 
@@ -16,7 +16,7 @@ app.get('/cryptocurrencies/', function (req, res) { //endereco da requisicao ond
             'convert': 'BRL'
         },
         headers: {
-            'X-CMC_PRO_API_KEY': 'XXXXXXXX-XXXXX-XXXXXX-XXXX-XXXXXXXX'
+            'X-CMC_PRO_API_KEY': 'XXXXXXX - XXXXXXXX - XXXXXXXXX'
         },
         json: true,
         gzip: true

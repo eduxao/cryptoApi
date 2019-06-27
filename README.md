@@ -1,6 +1,6 @@
 # cryptoApi
 
-#### Tecnologias utilizadas
+### Tecnologias utilizadas
 Node js
 JavaScript
 Bootstrap
@@ -8,18 +8,18 @@ Axios
 
 Utilizado a API da CoinMarketCap
 
-### Para roda o projeto
+## Para roda o projeto
 - Aplicação
 
-npm install express
-npm i request-promise
-npm install cors
+>npm install express
+>npm i request-promise
+>npm install cors
 
 - Rodar Scripts
-npm install — save-dev nodemon
-npm install http-server -g
+>npm install — save-dev nodemon
+>npm install http-server -g
 
-### Como rodar o projeto
+## Como rodar o projeto
 
 1 - Criar uma conta no CoinMarketCap e adquirir a key
 2 - Inserir a key na api.js
